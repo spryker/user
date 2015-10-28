@@ -5,10 +5,10 @@
 
 namespace SprykerFeature\Zed\User\Persistence\Propel;
 
-use SprykerFeature\Zed\User\Persistence\Propel\Base\SpyUser as BaseSpyUser;
+use Orm\Zed\User\Persistence\Base\SpyUserQuery as BaseSpyUserQuery;
 
 /**
- * Skeleton subclass for representing a row from the 'spy_user' table.
+ * Skeleton subclass for performing query and update operations on the 'spy_user' table.
  *
  *
  *
@@ -17,7 +17,7 @@ use SprykerFeature\Zed\User\Persistence\Propel\Base\SpyUser as BaseSpyUser;
  * long as it does not already exist in the output directory.
  *
  */
-class SpyUser extends BaseSpyUser
+abstract class AbstractSpyUserQuery extends BaseSpyUserQuery
 {
 
-}
+} // SpyUserQuery
