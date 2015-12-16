@@ -11,7 +11,7 @@ use Spryker\Zed\Auth\Business\AuthFacade;
 use Spryker\Zed\User\Business\UserFacade;
 use Orm\Zed\User\Persistence\SpyUserQuery;
 
-class UserDependencyContainer extends AbstractPersistenceFactory
+class UserPersistenceFactory extends AbstractPersistenceFactory
 {
 
     /**

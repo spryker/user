@@ -16,7 +16,7 @@ use Spryker\Zed\User\UserConfig;
 /**
  * @method UserConfig getConfig()
  */
-class UserDependencyContainer extends AbstractBusinessFactory
+class UserBusinessFactory extends AbstractBusinessFactory
 {
 
     /**
