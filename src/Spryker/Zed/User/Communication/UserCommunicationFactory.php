@@ -18,7 +18,7 @@ use Spryker\Zed\User\UserDependencyProvider;
 /**
  * @method UserQueryContainer getQueryContainer()
  */
-class UserDependencyContainer extends AbstractCommunicationFactory
+class UserCommunicationFactory extends AbstractCommunicationFactory
 {
 
     /**
