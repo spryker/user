@@ -9,7 +9,7 @@ namespace SprykerTest\Zed\User\Communication\Plugin\Security;
 
 use Codeception\Test\Unit;
 use Spryker\Shared\Security\Configuration\SecurityConfiguration;
-use Spryker\Zed\User\Communication\Plugin\Security\UserSessionHandlerSecurityPlugin;
+use Spryker\Zed\User\Communication\Plugin\Security\ZedUserSessionHandlerSecurityPlugin;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -21,10 +21,10 @@ use Symfony\Component\HttpFoundation\Response;
  * @group Communication
  * @group Plugin
  * @group Security
- * @group UserSessionHandlerSecurityPluginTest
+ * @group ZedUserSessionHandlerSecurityPluginTest
  * Add your own group annotations below this line
  */
-class UserSessionHandlerSecurityPluginTest extends Unit
+class ZedUserSessionHandlerSecurityPluginTest extends Unit
 {
     /**
      * @var string
@@ -43,33 +43,28 @@ class UserSessionHandlerSecurityPluginTest extends Unit
     {
         parent::_before();
 
-        if ($this->tester->isSymfonyVersion5() !== true) {
-            $this->markTestSkipped('Compatible only with `symfony/security-core` package version ^5.0.0. To be removed once Symfony 5 support is discontinued.');
+        if ($this->tester->isSymfonyVersion5() === true) {
+            $this->markTestSkipped('Compatible only with `symfony/security-core` package version >= 6. Will be enabled by default once Symfony 5 support is discontinued.');
         }
-
-        $this->tester->enableSecurityApplicationPlugin();
     }
 
     /**
-     * @group t
-     *
      * @return void
      */
     public function testUserSessionHandlerAddedToContainer(): void
     {
         // Arrange
-        $container = $this->tester->getContainer();
-        $this->addAuthentication();
-
-        $securityPlugin = new UserSessionHandlerSecurityPlugin();
+        $securityPlugin = new ZedUserSessionHandlerSecurityPlugin();
         $securityPlugin->setFactory($this->tester->getFactory());
         $this->tester->addSecurityPlugin($securityPlugin);
-        $listenerName = sprintf('security.authentication_listener.%s.user_session_handler', static::FIREWALL_NAME);
 
+        $this->addAuthentication();
+
+        $listenerName = sprintf('security.authentication_listener.%s.user_session_handler', static::FIREWALL_NAME);
         $httpKernelBrowser = $this->tester->getHttpKernelBrowser();
 
         // Arrange
-        $httpKernelBrowser->request('get', '/test');
+        $container = $this->tester->getContainer();
 
         // Assert
         $this->assertTrue($container->has($listenerName));
@@ -85,11 +80,12 @@ class UserSessionHandlerSecurityPluginTest extends Unit
             ->addFirewall(static::FIREWALL_NAME, [
                 'pattern' => '^/test',
                 'user_session_handler' => true,
-                'anonymous' => true,
             ])
             ->addAccessRules([['^/', 'ROLE_USER']]);
 
-        $this->tester->mockSecurityPlugin($securityConfiguration);
+        $this->tester->mockZedSecurityPlugin($securityConfiguration);
+        $this->tester->mockSecurityDependencies();
+        $this->tester->enableSecurityApplicationPlugin();
 
         $this->tester->addRoute('test', '/test', function () {
             return new Response();

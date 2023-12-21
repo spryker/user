@@ -5,38 +5,55 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace Spryker\Zed\User\Communication\Plugin\Security;
+namespace Spryker\Zed\User\Communication\Extender;
 
 use Spryker\Service\Container\ContainerInterface;
 use Spryker\Shared\SecurityExtension\Configuration\SecurityBuilderInterface;
-use Spryker\Shared\SecurityExtension\Dependency\Plugin\SecurityPluginInterface;
-use Spryker\Zed\Kernel\Communication\AbstractPlugin;
-use Spryker\Zed\User\Communication\Extender\SecurityServiceExtenderInterface;
+use Spryker\Zed\User\Business\UserFacadeInterface;
 use Spryker\Zed\User\Communication\Plugin\Security\Listener\CurrentUserSessionHandlerListener;
+use Symfony\Component\Security\Http\Firewall\FirewallListenerInterface;
 
-/**
- * @deprecated Use {@link \Spryker\Zed\User\Communication\Plugin\Security\ZedUserSessionHandlerSecurityPlugin} instead.
- *
- * @method \Spryker\Zed\User\Communication\UserCommunicationFactory getFactory()
- * @method \Spryker\Zed\User\Business\UserFacadeInterface getFacade()
- * @method \Spryker\Zed\User\Persistence\UserQueryContainerInterface getQueryContainer()
- * @method \Spryker\Zed\User\UserConfig getConfig()
- */
-class UserSessionHandlerSecurityPlugin extends AbstractPlugin implements SecurityPluginInterface, SecurityServiceExtenderInterface
+class SecurityServiceExtender implements SecurityServiceExtenderInterface
 {
     /**
-     * @uses \Spryker\Zed\Security\Communication\Plugin\Application\SecurityApplicationPlugin::SERVICE_SECURITY_TOKEN_STORAGE
-     *
      * @var string
      */
     protected const SERVICE_SECURITY_TOKEN_STORAGE = 'security.token_storage';
 
     /**
-     * {@inheritDoc}
-     * - Extends security service user session handler listener.
-     *
-     * @api
-     *
+     * @var string
+     */
+    protected const SECURITY_AUTHENTICATION_LISTENER_FACTORY_USER_SESSION_HANDLER = 'security.authentication_listener.factory.user_session_handler';
+
+    /**
+     * @var string
+     */
+    protected const SECURITY_AUTHENTICATION_LISTENER_USER_SESSION_HANDLER_PLACEHOLDER = 'security.authentication_listener.%s.user_session_handler';
+
+    /**
+     * @var string
+     */
+    protected const SECURITY_AUTHENTICATION_LISTENER_USER_SESSION_HANDLER_PROTO = 'security.authentication_listener.user_session_handler._proto';
+
+    /**
+     * @var string
+     */
+    protected const USER_SESSION_HANDLER = 'user_session_handler';
+
+    /**
+     * @var \Spryker\Zed\User\Business\UserFacadeInterface
+     */
+    protected UserFacadeInterface $userFacade;
+
+    /**
+     * @param \Spryker\Zed\User\Business\UserFacadeInterface $userFacade
+     */
+    public function __construct(UserFacadeInterface $userFacade)
+    {
+        $this->userFacade = $userFacade;
+    }
+
+    /**
      * @param \Spryker\Shared\SecurityExtension\Configuration\SecurityBuilderInterface $securityBuilder
      * @param \Spryker\Service\Container\ContainerInterface $container
      *
@@ -58,22 +75,22 @@ class UserSessionHandlerSecurityPlugin extends AbstractPlugin implements Securit
     protected function addAuthenticationListenerFactory(ContainerInterface $container): ContainerInterface
     {
         $container->set(
-            'security.authentication_listener.factory.user_session_handler',
+            static::SECURITY_AUTHENTICATION_LISTENER_FACTORY_USER_SESSION_HANDLER,
             $container->protect(
-                function ($firewallName, $options) use ($container) {
-                    $listenerName = sprintf('security.authentication_listener.%s.user_session_handler', $firewallName);
+                function (string $firewallName, array $options) use ($container): array {
+                    $listenerName = sprintf(static::SECURITY_AUTHENTICATION_LISTENER_USER_SESSION_HANDLER_PLACEHOLDER, $firewallName);
+
                     if (!$container->has($listenerName)) {
                         $container->set(
                             $listenerName,
-                            $container->get('security.authentication_listener.user_session_handler._proto')($firewallName),
+                            $container->get(static::SECURITY_AUTHENTICATION_LISTENER_USER_SESSION_HANDLER_PROTO)($firewallName),
                         );
                     }
 
                     return [
-                        'security.authentication_provider.' . $firewallName . '.anonymous',
                         $listenerName,
                         null,
-                        'user_session_handler',
+                        static::USER_SESSION_HANDLER,
                     ];
                 },
             ),
@@ -89,11 +106,11 @@ class UserSessionHandlerSecurityPlugin extends AbstractPlugin implements Securit
      */
     protected function addAuthenticationListenerPrototype(ContainerInterface $container): ContainerInterface
     {
-        $container->set('security.authentication_listener.user_session_handler._proto', $container->protect(function ($providerKey) use ($container) {
-            return function () use ($container) {
+        $container->set(static::SECURITY_AUTHENTICATION_LISTENER_USER_SESSION_HANDLER_PROTO, $container->protect(function (string $firewallName) use ($container): callable {
+            return function () use ($container): FirewallListenerInterface {
                 return new CurrentUserSessionHandlerListener(
                     $container->get(static::SERVICE_SECURITY_TOKEN_STORAGE),
-                    $this->getFacade(),
+                    $this->userFacade,
                 );
             };
         }));
