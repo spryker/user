@@ -54,8 +54,6 @@ interface UserFacadeInterface
      *
      * @api
      *
-     * @deprecated Use {@link \Spryker\Zed\User\Business\UserFacadeInterface::getUserCollection()} instead.
-     *
      * @param string $username
      *
      * @return \Generated\Shared\Transfer\UserTransfer
@@ -68,8 +66,6 @@ interface UserFacadeInterface
      *
      * @api
      *
-     * @deprecated Use {@link \Spryker\Zed\User\Business\UserFacadeInterface::getUserCollection()} instead.
-     *
      * @param int $idUser
      *
      * @return \Generated\Shared\Transfer\UserTransfer
@@ -81,8 +77,6 @@ interface UserFacadeInterface
      * - Returns user by id if it exists.
      *
      * @api
-     *
-     * @deprecated Use {@link \Spryker\Zed\User\Business\UserFacadeInterface::getUserCollection()} instead.
      *
      * @param int $idUser
      *
@@ -97,8 +91,6 @@ interface UserFacadeInterface
      *
      * @api
      *
-     * @deprecated Use {@link \Spryker\Zed\User\Business\UserFacadeInterface::getUserCollection()} instead.
-     *
      * @param \Generated\Shared\Transfer\UserCriteriaTransfer $userCriteriaTransfer
      *
      * @return \Generated\Shared\Transfer\UserTransfer|null
@@ -110,8 +102,6 @@ interface UserFacadeInterface
      * - TODO: Add method specification.
      *
      * @api
-     *
-     * @deprecated Use {@link \Spryker\Zed\User\Business\UserFacadeInterface::getUserCollection()} instead.
      *
      * @param int $idUser
      *
