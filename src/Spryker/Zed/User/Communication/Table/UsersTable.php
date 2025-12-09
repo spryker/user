@@ -204,7 +204,7 @@ class UsersTable extends AbstractTable
     {
         switch ($user[SpyUserTableMap::COL_STATUS]) {
             case SpyUserTableMap::COL_STATUS_ACTIVE:
-                return $this->generateLabel('Active', 'label-success');
+                return $this->generateLabel('Active', 'label-primary');
             case SpyUserTableMap::COL_STATUS_BLOCKED:
                 return $this->generateLabel('Deactivated', 'label-danger');
             case SpyUserTableMap::COL_STATUS_DELETED:
