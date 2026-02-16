@@ -5,3 +5,9 @@ parameters:
         - '#Call to an undefined method .+getUsername\(\).#'
         -
             identifier: missingType.iterableValue
+        -
+            identifier: return.type
+        -
+            identifier: assign.propertyType
+        -
+            identifier: argument.type
