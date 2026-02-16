@@ -47,34 +47,34 @@ class User implements UserInterface
     protected $userConfig;
 
     /**
-     * @var list<\Spryker\Zed\UserExtension\Dependency\Plugin\UserPostSavePluginInterface>
+     * @var array<\Spryker\Zed\UserExtension\Dependency\Plugin\UserPostSavePluginInterface>
      */
     protected $userPostSavePlugins;
 
     /**
-     * @var list<\Spryker\Zed\UserExtension\Dependency\Plugin\UserPreSavePluginInterface>
+     * @var array<\Spryker\Zed\UserExtension\Dependency\Plugin\UserPreSavePluginInterface>
      */
     protected $userPreSavePlugins;
 
     /**
      * @deprecated Use {@link \Spryker\Zed\User\Business\Model\User::$userExpanderPlugins} instead.
      *
-     * @var list<\Spryker\Zed\UserExtension\Dependency\Plugin\UserTransferExpanderPluginInterface>
+     * @var array<\Spryker\Zed\UserExtension\Dependency\Plugin\UserTransferExpanderPluginInterface>
      */
     protected $userTransferExpanderPlugins;
 
     /**
-     * @var list<\Spryker\Zed\UserExtension\Dependency\Plugin\UserExpanderPluginInterface>
+     * @var array<\Spryker\Zed\UserExtension\Dependency\Plugin\UserExpanderPluginInterface>
      */
     protected array $userExpanderPlugins;
 
     /**
-     * @var list<\Spryker\Zed\UserExtension\Dependency\Plugin\UserPostCreatePluginInterface>
+     * @var array<\Spryker\Zed\UserExtension\Dependency\Plugin\UserPostCreatePluginInterface>
      */
     protected array $userPostCreatePlugins;
 
     /**
-     * @var list<\Spryker\Zed\UserExtension\Dependency\Plugin\UserPostUpdatePluginInterface>
+     * @var array<\Spryker\Zed\UserExtension\Dependency\Plugin\UserPostUpdatePluginInterface>
      */
     protected array $userPostUpdatePlugins;
 
@@ -82,12 +82,12 @@ class User implements UserInterface
      * @param \Spryker\Zed\User\Persistence\UserQueryContainerInterface $queryContainer
      * @param \Spryker\Client\Session\SessionClientInterface $session
      * @param \Spryker\Zed\User\UserConfig $userConfig
-     * @param list<\Spryker\Zed\UserExtension\Dependency\Plugin\UserPostSavePluginInterface> $userPostSavePlugins
-     * @param list<\Spryker\Zed\UserExtension\Dependency\Plugin\UserPreSavePluginInterface> $userPreSavePlugins
-     * @param list<\Spryker\Zed\UserExtension\Dependency\Plugin\UserTransferExpanderPluginInterface> $userTransferExpanderPlugins
-     * @param list<\Spryker\Zed\UserExtension\Dependency\Plugin\UserExpanderPluginInterface> $userExpanderPlugins
-     * @param list<\Spryker\Zed\UserExtension\Dependency\Plugin\UserPostCreatePluginInterface> $userPostCreatePlugins
-     * @param list<\Spryker\Zed\UserExtension\Dependency\Plugin\UserPostUpdatePluginInterface> $userPostUpdatePlugins
+     * @param array<\Spryker\Zed\UserExtension\Dependency\Plugin\UserPostSavePluginInterface> $userPostSavePlugins
+     * @param array<\Spryker\Zed\UserExtension\Dependency\Plugin\UserPreSavePluginInterface> $userPreSavePlugins
+     * @param array<\Spryker\Zed\UserExtension\Dependency\Plugin\UserTransferExpanderPluginInterface> $userTransferExpanderPlugins
+     * @param array<\Spryker\Zed\UserExtension\Dependency\Plugin\UserExpanderPluginInterface> $userExpanderPlugins
+     * @param array<\Spryker\Zed\UserExtension\Dependency\Plugin\UserPostCreatePluginInterface> $userPostCreatePlugins
+     * @param array<\Spryker\Zed\UserExtension\Dependency\Plugin\UserPostUpdatePluginInterface> $userPostUpdatePlugins
      */
     public function __construct(
         UserQueryContainerInterface $queryContainer,

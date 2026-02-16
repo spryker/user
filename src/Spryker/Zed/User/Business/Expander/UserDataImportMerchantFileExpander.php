@@ -46,7 +46,7 @@ class UserDataImportMerchantFileExpander implements UserDataImportMerchantFileEx
     /**
      * @param \Generated\Shared\Transfer\DataImportMerchantFileCollectionTransfer $dataImportMerchantFileCollectionTransfer
      *
-     * @return list<int>
+     * @return array<int>
      */
     protected function extractUserIds(
         DataImportMerchantFileCollectionTransfer $dataImportMerchantFileCollectionTransfer
@@ -63,7 +63,7 @@ class UserDataImportMerchantFileExpander implements UserDataImportMerchantFileEx
     }
 
     /**
-     * @param list<int> $userIds
+     * @param array<int> $userIds
      *
      * @return array<int, \Generated\Shared\Transfer\UserTransfer>
      */

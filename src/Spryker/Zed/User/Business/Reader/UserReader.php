@@ -20,12 +20,12 @@ class UserReader implements UserReaderInterface
     protected UserRepositoryInterface $userRepository;
 
     /**
-     * @var list<\Spryker\Zed\UserExtension\Dependency\Plugin\UserExpanderPluginInterface>
+     * @var array<\Spryker\Zed\UserExtension\Dependency\Plugin\UserExpanderPluginInterface>
      */
     protected array $userExpanderPlugins;
 
     /**
-     * @var list<\Spryker\Zed\UserExtension\Dependency\Plugin\UserTransferExpanderPluginInterface>
+     * @var array<\Spryker\Zed\UserExtension\Dependency\Plugin\UserTransferExpanderPluginInterface>
      */
     protected array $userTransferExpanderPlugins;
 
