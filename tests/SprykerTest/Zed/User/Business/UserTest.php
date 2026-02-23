@@ -306,11 +306,11 @@ class UserTest extends Unit
         // Checks that User TO is cloned after reading from session and before returning to caller.
         $sessionClient->expects($this->once())
             ->method('get')
-            ->will($this->returnValue($userTransfer));
+            ->willReturn($userTransfer);
 
         $sessionClient->expects($this->once())
             ->method('has')
-            ->will($this->returnValue(true));
+            ->willReturn(true);
 
         $userFromSession = $userModel->getCurrentUser();
         $this->assertEquals($userTransfer, $userFromSession);
@@ -332,7 +332,7 @@ class UserTest extends Unit
 
         $sessionClient->expects($this->once())
             ->method('has')
-            ->will($this->returnValue(false));
+            ->willReturn(false);
 
         $hasCurrentUser = $userModel->hasCurrentUser();
         $this->assertFalse($hasCurrentUser);
