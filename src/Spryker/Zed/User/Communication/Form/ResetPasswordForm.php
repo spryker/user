@@ -36,9 +36,6 @@ class ResetPasswordForm extends AbstractType
      */
     public const FIELD_PASSWORD = 'password';
 
-    /**
-     * @return string
-     */
     public function getBlockPrefix(): string
     {
         return 'reset_password';

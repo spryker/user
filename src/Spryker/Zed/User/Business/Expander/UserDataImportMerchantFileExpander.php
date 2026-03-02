@@ -14,18 +14,10 @@ use Spryker\Zed\User\Business\Reader\UserReaderInterface;
 
 class UserDataImportMerchantFileExpander implements UserDataImportMerchantFileExpanderInterface
 {
-    /**
-     * @param \Spryker\Zed\User\Business\Reader\UserReaderInterface $userReader
-     */
     public function __construct(protected UserReaderInterface $userReader)
     {
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\DataImportMerchantFileCollectionTransfer $dataImportMerchantFileCollectionTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataImportMerchantFileCollectionTransfer
-     */
     public function expand(
         DataImportMerchantFileCollectionTransfer $dataImportMerchantFileCollectionTransfer
     ): DataImportMerchantFileCollectionTransfer {

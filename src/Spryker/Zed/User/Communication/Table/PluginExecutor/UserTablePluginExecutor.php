@@ -56,11 +56,6 @@ class UserTablePluginExecutor implements UserTablePluginExecutorInterface
         return $buttonTransfers;
     }
 
-    /**
-     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $tableConfiguration
-     *
-     * @return \Spryker\Zed\Gui\Communication\Table\TableConfiguration
-     */
     public function executeConfigExpanderPlugins(TableConfiguration $tableConfiguration): TableConfiguration
     {
         foreach ($this->userTableConfigExpanderPlugins as $userTableConfigExpanderPlugin) {
@@ -70,11 +65,6 @@ class UserTablePluginExecutor implements UserTablePluginExecutorInterface
         return $tableConfiguration;
     }
 
-    /**
-     * @param array $item
-     *
-     * @return array
-     */
     public function executeDataExpanderPlugins(array $item): array
     {
         $data = [];

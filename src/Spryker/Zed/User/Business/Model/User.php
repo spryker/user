@@ -158,11 +158,6 @@ class User implements UserInterface
         return $this->handleUserCreateTransaction($userTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\UserTransfer $userTransfer
-     *
-     * @return \Generated\Shared\Transfer\UserTransfer
-     */
     public function updateUser(UserTransfer $userTransfer): UserTransfer
     {
         return $this->getTransactionHandler()->handleTransaction(function () use ($userTransfer) {
@@ -245,11 +240,6 @@ class User implements UserInterface
         return $userTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\UserTransfer $userTransfer
-     *
-     * @return \Generated\Shared\Transfer\UserTransfer
-     */
     protected function executePreSavePlugins(UserTransfer $userTransfer): UserTransfer
     {
         foreach ($this->userPreSavePlugins as $preSavePlugin) {
@@ -259,11 +249,6 @@ class User implements UserInterface
         return $userTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\UserTransfer $userTransfer
-     *
-     * @return \Generated\Shared\Transfer\UserTransfer
-     */
     protected function executePostSavePlugins(UserTransfer $userTransfer): UserTransfer
     {
         foreach ($this->userPostSavePlugins as $postSavePlugin) {
@@ -412,11 +397,6 @@ class User implements UserInterface
         return null;
     }
 
-    /**
-     * @param int $idUser
-     *
-     * @return \Generated\Shared\Transfer\UserTransfer|null
-     */
     protected function findUserByIdUser(int $idUser): ?UserTransfer
     {
         $userEntity = $this->queryContainer
@@ -430,11 +410,6 @@ class User implements UserInterface
         return $this->entityToTransfer($userEntity);
     }
 
-    /**
-     * @param string $email
-     *
-     * @return \Generated\Shared\Transfer\UserTransfer|null
-     */
     protected function findUserByEmail(string $email): ?UserTransfer
     {
         $userEntity = $this->queryContainer
@@ -598,11 +573,6 @@ class User implements UserInterface
         return $userTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\UserTransfer $userTransfer
-     *
-     * @return \Generated\Shared\Transfer\UserTransfer
-     */
     protected function executeUserExpanderPlugins(UserTransfer $userTransfer): UserTransfer
     {
         $userCollectionTransfer = (new UserCollectionTransfer())->addUser($userTransfer);
@@ -649,12 +619,6 @@ class User implements UserInterface
         return $this->updateUserStatus($idUser, SpyUserTableMap::COL_STATUS_BLOCKED);
     }
 
-    /**
-     * @param int $idUser
-     * @param string $status
-     *
-     * @return bool
-     */
     protected function updateUserStatus(int $idUser, string $status): bool
     {
         $userEntity = $this->queryUserById($idUser);
@@ -696,11 +660,6 @@ class User implements UserInterface
         return sprintf('%s:currentUser', static::USER_BUNDLE_SESSION_KEY);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\UserTransfer $userTransfer
-     *
-     * @return \Generated\Shared\Transfer\UserTransfer
-     */
     protected function handleUserCreateTransaction(UserTransfer $userTransfer): UserTransfer
     {
         return $this->getTransactionHandler()->handleTransaction(function () use ($userTransfer) {
@@ -710,11 +669,6 @@ class User implements UserInterface
         });
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\UserTransfer $userTransfer
-     *
-     * @return \Generated\Shared\Transfer\UserTransfer
-     */
     protected function executePostCreateTransaction(UserTransfer $userTransfer): UserTransfer
     {
         $userCollectionResponseTransfer = (new UserCollectionResponseTransfer())->addUser($userTransfer);
@@ -723,11 +677,6 @@ class User implements UserInterface
         return $userCollectionResponseTransfer->getUsers()->offsetGet(0);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\UserCollectionResponseTransfer $userCollectionResponseTransfer
-     *
-     * @return \Generated\Shared\Transfer\UserCollectionResponseTransfer
-     */
     protected function executeUserPostCreatePlugins(
         UserCollectionResponseTransfer $userCollectionResponseTransfer
     ): UserCollectionResponseTransfer {
@@ -738,11 +687,6 @@ class User implements UserInterface
         return $userCollectionResponseTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\UserTransfer $userTransfer
-     *
-     * @return \Generated\Shared\Transfer\UserTransfer
-     */
     protected function executeUserUpdateTransaction(UserTransfer $userTransfer): UserTransfer
     {
         $userTransfer = $this->executeSaveTransaction($userTransfer);
@@ -750,11 +694,6 @@ class User implements UserInterface
         return $this->executeUserPostUpdatePlugins($userTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\UserTransfer $userTransfer
-     *
-     * @return \Generated\Shared\Transfer\UserTransfer
-     */
     protected function executeUserPostUpdatePlugins(UserTransfer $userTransfer): UserTransfer
     {
         $userCollectionResponseTransfer = (new UserCollectionResponseTransfer())->addUser($userTransfer);

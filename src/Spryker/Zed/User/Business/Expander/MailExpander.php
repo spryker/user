@@ -18,19 +18,11 @@ class MailExpander implements MailExpanderInterface
      */
     protected $userModel;
 
-    /**
-     * @param \Spryker\Zed\User\Business\Model\UserInterface $userModel
-     */
     public function __construct(UserInterface $userModel)
     {
         $this->userModel = $userModel;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\MailTransfer $mailTransfer
-     *
-     * @return \Generated\Shared\Transfer\MailTransfer
-     */
     public function expandMailWithUserData(MailTransfer $mailTransfer): MailTransfer
     {
         $email = $this->getEmailFromMailTransfer($mailTransfer);
@@ -40,11 +32,6 @@ class MailExpander implements MailExpanderInterface
         return $mailTransfer->setUser($userTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\MailTransfer $mailTransfer
-     *
-     * @return string
-     */
     protected function getEmailFromMailTransfer(MailTransfer $mailTransfer): string
     {
         /** @var \Generated\Shared\Transfer\MailRecipientTransfer $mailRecipientTransfer */

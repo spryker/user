@@ -453,11 +453,6 @@ class EditController extends AbstractController
         }
     }
 
-    /**
-     * @param int $idUser
-     *
-     * @return bool
-     */
     protected function isCurrentUser(int $idUser): bool
     {
         $currentUser = $this->getFacade()->getCurrentUser();
@@ -465,11 +460,6 @@ class EditController extends AbstractController
         return $currentUser->getIdUser() === $idUser;
     }
 
-    /**
-     * @param int $idUser
-     *
-     * @return \Generated\Shared\Transfer\UserTransfer|null
-     */
     protected function findUserTransfer(int $idUser): ?UserTransfer
     {
         $userCriteriaTransfer = $this->createUserCriteriaTransfer($idUser);
@@ -478,11 +468,6 @@ class EditController extends AbstractController
         return $userCollectionTransfer->getUsers()->getIterator()->current();
     }
 
-    /**
-     * @param int $idUser
-     *
-     * @return \Generated\Shared\Transfer\UserCriteriaTransfer
-     */
     protected function createUserCriteriaTransfer(int $idUser): UserCriteriaTransfer
     {
         $userConditionsTransfer = (new UserConditionsTransfer())->addIdUser($idUser);

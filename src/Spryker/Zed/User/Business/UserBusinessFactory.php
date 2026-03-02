@@ -26,9 +26,6 @@ use Spryker\Zed\User\UserDependencyProvider;
  */
 class UserBusinessFactory extends AbstractBusinessFactory
 {
-    /**
-     * @return \Spryker\Zed\User\Business\Expander\MailExpanderInterface
-     */
     public function createMailExpander(): MailExpanderInterface
     {
         return new MailExpander($this->createUserModel());
@@ -52,9 +49,6 @@ class UserBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\User\Business\Reader\UserReaderInterface
-     */
     public function createUserReader(): UserReaderInterface
     {
         return new UserReader(
@@ -90,9 +84,6 @@ class UserBusinessFactory extends AbstractBusinessFactory
         return $this->getProvidedDependency(UserDependencyProvider::PLUGINS_USER_TRANSFER_EXPANDER);
     }
 
-    /**
-     * @return \Spryker\Client\Session\SessionClientInterface
-     */
     public function getSessionClient(): SessionClientInterface
     {
         return $this->getProvidedDependency(UserDependencyProvider::CLIENT_SESSION);
@@ -110,9 +101,6 @@ class UserBusinessFactory extends AbstractBusinessFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\User\Business\Expander\UserDataImportMerchantFileExpanderInterface
-     */
     public function createUserDataImportMerchantFileExpander(): UserDataImportMerchantFileExpanderInterface
     {
         return new UserDataImportMerchantFileExpander(

@@ -12,12 +12,6 @@ use Orm\Zed\User\Persistence\SpyUserQuery;
 
 class UserQueryCriteriaMapper
 {
-    /**
-     * @param \Generated\Shared\Transfer\QueryCriteriaTransfer $queryCriteriaTransfer
-     * @param \Orm\Zed\User\Persistence\SpyUserQuery $userQuery
-     *
-     * @return \Orm\Zed\User\Persistence\SpyUserQuery
-     */
     public function mapQueryCriteriaTransferToUserQueryCriteria(
         QueryCriteriaTransfer $queryCriteriaTransfer,
         SpyUserQuery $userQuery
@@ -27,12 +21,6 @@ class UserQueryCriteriaMapper
         return $userQuery;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\QueryCriteriaTransfer $queryCriteriaTransfer
-     * @param \Orm\Zed\User\Persistence\SpyUserQuery $userQuery
-     *
-     * @return \Orm\Zed\User\Persistence\SpyUserQuery
-     */
     protected function addConditions(
         QueryCriteriaTransfer $queryCriteriaTransfer,
         SpyUserQuery $userQuery

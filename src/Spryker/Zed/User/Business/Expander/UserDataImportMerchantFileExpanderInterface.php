@@ -11,11 +11,6 @@ use Generated\Shared\Transfer\DataImportMerchantFileCollectionTransfer;
 
 interface UserDataImportMerchantFileExpanderInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\DataImportMerchantFileCollectionTransfer $dataImportMerchantFileCollectionTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataImportMerchantFileCollectionTransfer
-     */
     public function expand(
         DataImportMerchantFileCollectionTransfer $dataImportMerchantFileCollectionTransfer
     ): DataImportMerchantFileCollectionTransfer;

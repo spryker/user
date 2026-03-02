@@ -23,11 +23,6 @@ use SprykerTest\Zed\User\UserCommunicationTester;
  */
 class UserListCest
 {
-    /**
-     * @param \SprykerTest\Zed\User\UserCommunicationTester $i
-     *
-     * @return void
-     */
     public function breadcrumbIsVisible(UserCommunicationTester $i): void
     {
         $i->amOnPage(UserListPage::URL);

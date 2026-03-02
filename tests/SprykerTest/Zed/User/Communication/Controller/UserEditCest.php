@@ -24,11 +24,6 @@ use SprykerTest\Zed\User\UserCommunicationTester;
  */
 class UserEditCest
 {
-    /**
-     * @param \SprykerTest\Zed\User\UserCommunicationTester $i
-     *
-     * @return void
-     */
     public function breadcrumbIsVisible(UserCommunicationTester $i): void
     {
         $i->listDataTable(UserListPage::URL . '/index/table');
@@ -36,11 +31,6 @@ class UserEditCest
         $i->seeBreadcrumbNavigation('Users / Users / Edit User');
     }
 
-    /**
-     * @param \SprykerTest\Zed\User\UserCommunicationTester $i
-     *
-     * @return void
-     */
     public function editUser(UserCommunicationTester $i): void
     {
         $formData = [
@@ -62,11 +52,6 @@ class UserEditCest
         $i->amOnPage('/user');
     }
 
-    /**
-     * @param \SprykerTest\Zed\User\UserCommunicationTester $i
-     *
-     * @return void
-     */
     public function editUserWithInvalidEmailAndFail(UserCommunicationTester $i): void
     {
         $formData = [

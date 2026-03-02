@@ -137,11 +137,6 @@ class UserDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     public function providePersistenceLayerDependencies(Container $container): Container
     {
         $container = parent::providePersistenceLayerDependencies($container);
@@ -179,11 +174,6 @@ class UserDependencyProvider extends AbstractBundleDependencyProvider
         return $container;
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addRequestStackService(Container $container): Container
     {
         $container->set(static::SERVICE_REQUEST_STACK, function (Container $container) {
@@ -254,11 +244,6 @@ class UserDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addPostSavePlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_POST_SAVE, function (): array {
@@ -276,11 +261,6 @@ class UserDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addUserPreSavePlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_USER_PRE_SAVE, function (): array {
@@ -324,11 +304,6 @@ class UserDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addUserTableConfigExpanderPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_USER_TABLE_CONFIG_EXPANDER, function (): array {
@@ -346,11 +321,6 @@ class UserDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addUserTableDataExpanderPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_USER_TABLE_DATA_EXPANDER, function (): array {
@@ -368,11 +338,6 @@ class UserDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addUserFormExpanderPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_USER_FORM_EXPANDER, function (): array {
@@ -390,11 +355,6 @@ class UserDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addUserExpanderPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_USER_EXPANDER, function () {
@@ -412,11 +372,6 @@ class UserDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addUserQueryCriteriaExpanderPlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_USER_QUERY_CRITERIA_EXPANDER, function () {
@@ -434,11 +389,6 @@ class UserDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addUserPostCreatePlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_USER_POST_CREATE, function () {
@@ -456,11 +406,6 @@ class UserDependencyProvider extends AbstractBundleDependencyProvider
         return [];
     }
 
-    /**
-     * @param \Spryker\Zed\Kernel\Container $container
-     *
-     * @return \Spryker\Zed\Kernel\Container
-     */
     protected function addUserPostUpdatePlugins(Container $container): Container
     {
         $container->set(static::PLUGINS_USER_POST_UPDATE, function () {

@@ -32,9 +32,6 @@ class UserDeleteConfirmForm extends AbstractType
      */
     protected const DELETE_METHOD = 'DELETE';
 
-    /**
-     * @return string
-     */
     public function getBlockPrefix(): string
     {
         return 'delete_confirm_form';
@@ -52,11 +49,6 @@ class UserDeleteConfirmForm extends AbstractType
         $builder->setMethod(static::DELETE_METHOD);
     }
 
-    /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
-     *
-     * @return void
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

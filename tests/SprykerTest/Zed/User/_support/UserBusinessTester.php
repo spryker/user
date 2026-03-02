@@ -35,19 +35,11 @@ class UserBusinessTester extends Actor
 {
     use _generated\UserBusinessTesterActions;
 
-    /**
-     * @return void
-     */
     public function ensureUserTableIsEmpty(): void
     {
         $this->ensureDatabaseTableIsEmpty($this->getUserQuery());
     }
 
-    /**
-     * @param string $username
-     *
-     * @return \Generated\Shared\Transfer\UserTransfer|null
-     */
     public function findUserByUserName(string $username): ?UserTransfer
     {
         $userEntity = $this->getUserQuery()->findOneByUsername($username);
@@ -58,19 +50,11 @@ class UserBusinessTester extends Actor
         return (new UserTransfer())->fromArray($userEntity->toArray(), true);
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\UserTransfer
-     */
     public function getUserTransfer(): UserTransfer
     {
         return (new UserBuilder())->build();
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\UserTransfer $userTransfer
-     *
-     * @return \Spryker\Zed\UserExtension\Dependency\Plugin\UserPostUpdatePluginInterface
-     */
     public function getUserPostUpdatePluginMock(UserTransfer $userTransfer): UserPostUpdatePluginInterface
     {
         $userPostCreatePluginMock = Stub::makeEmpty(UserPostUpdatePluginInterface::class);
@@ -81,9 +65,6 @@ class UserBusinessTester extends Actor
         return $userPostCreatePluginMock;
     }
 
-    /**
-     * @return \Orm\Zed\User\Persistence\SpyUserQuery
-     */
     protected function getUserQuery(): SpyUserQuery
     {
         return SpyUserQuery::create();

@@ -26,10 +26,6 @@ class UserFormDataProvider
      */
     protected $userFacade;
 
-    /**
-     * @param \Spryker\Zed\User\Dependency\Plugin\GroupPluginInterface $groupPlugin
-     * @param \Spryker\Zed\User\Business\UserFacadeInterface $userFacade
-     */
     public function __construct(GroupPluginInterface $groupPlugin, UserFacadeInterface $userFacade)
     {
         $this->groupPlugin = $groupPlugin;
@@ -113,11 +109,6 @@ class UserFormDataProvider
         return $formData;
     }
 
-    /**
-     * @param int $idUser
-     *
-     * @return \Generated\Shared\Transfer\UserTransfer|null
-     */
     protected function findUserTransfer(int $idUser): ?UserTransfer
     {
         $userCriteriaTransfer = $this->createUserCriteriaTransfer($idUser);
@@ -126,11 +117,6 @@ class UserFormDataProvider
         return $userCollectionTransfer->getUsers()->getIterator()->current();
     }
 
-    /**
-     * @param int $idUser
-     *
-     * @return \Generated\Shared\Transfer\UserCriteriaTransfer
-     */
     protected function createUserCriteriaTransfer(int $idUser): UserCriteriaTransfer
     {
         $userConditionsTransfer = (new UserConditionsTransfer())->addIdUser($idUser);

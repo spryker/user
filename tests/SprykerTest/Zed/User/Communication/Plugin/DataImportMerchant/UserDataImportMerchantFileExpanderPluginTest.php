@@ -34,9 +34,6 @@ class UserDataImportMerchantFileExpanderPluginTest extends Unit
      */
     protected UserCommunicationTester $tester;
 
-    /**
-     * @return void
-     */
     public function testExpandShouldExpandDataImportMerchantFileCollectionWithUserData(): void
     {
         // Arrange
@@ -57,9 +54,6 @@ class UserDataImportMerchantFileExpanderPluginTest extends Unit
         $this->assertSame($userTransfer2->getIdUser(), $dataImportMerchantFileTransfers->offsetGet(1)->getUser()->getIdUser());
     }
 
-    /**
-     * @return void
-     */
     public function testExpandShouldThrowExceptionWhenDataImportMerchantFileTransferWithoutRequiredIdUser(): void
     {
         // Arrange
@@ -74,11 +68,6 @@ class UserDataImportMerchantFileExpanderPluginTest extends Unit
         (new UserDataImportMerchantFileExpanderPlugin())->expand($dataImportMerchantFileCollectionTransfer);
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\UserTransfer $userTransfer
-     *
-     * @return \Generated\Shared\Transfer\DataImportMerchantFileTransfer
-     */
     protected function createDataImportMerchantFileTransfer(UserTransfer $userTransfer): DataImportMerchantFileTransfer
     {
         return (new DataImportMerchantFileTransfer())->setIdUser($userTransfer->getIdUser());

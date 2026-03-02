@@ -33,9 +33,6 @@ class CreateUserTest extends Unit
      */
     public UserBusinessTester $tester;
 
-    /**
-     * @return void
-     */
     public function testCreatesUserInDatabase(): void
     {
         // Arrange
@@ -48,9 +45,6 @@ class CreateUserTest extends Unit
         $this->assertInstanceOf(UserTransfer::class, $this->tester->findUserByUserName($userTransfer->getUsername()));
     }
 
-    /**
-     * @return void
-     */
     public function testReturnsCorrectUserData(): void
     {
         // Arrange
@@ -68,9 +62,6 @@ class CreateUserTest extends Unit
         $this->assertNotEquals($userTransfer->getPassword(), $persistedUserTransfer->getPassword());
     }
 
-    /**
-     * @return void
-     */
     public function testExecutesUserPostSavePluginStack(): void
     {
         // Arrange
@@ -84,9 +75,6 @@ class CreateUserTest extends Unit
         $this->tester->getFacade()->createUser($userTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testExecutesUserPostCreatePluginStack(): void
     {
         // Arrange
@@ -100,9 +88,6 @@ class CreateUserTest extends Unit
         $this->tester->getFacade()->createUser($userTransfer);
     }
 
-    /**
-     * @return \Spryker\Zed\UserExtension\Dependency\Plugin\UserPostSavePluginInterface
-     */
     protected function getUserPostSavePluginMock(): UserPostSavePluginInterface
     {
         $userPostSavePluginMock = $this->getMockBuilder(UserPostSavePluginInterface::class)->getMock();
@@ -111,11 +96,6 @@ class CreateUserTest extends Unit
         return $userPostSavePluginMock;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\UserTransfer $userTransfer
-     *
-     * @return \Spryker\Zed\UserExtension\Dependency\Plugin\UserPostCreatePluginInterface
-     */
     protected function getUserPostCreatePluginMock(UserTransfer $userTransfer): UserPostCreatePluginInterface
     {
         $userPostCreatePluginMock = $this->getMockBuilder(UserPostCreatePluginInterface::class)->getMock();

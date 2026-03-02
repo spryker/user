@@ -31,10 +31,6 @@ class CurrentUserSessionHandlerListener extends AbstractListener
      */
     protected $userFacade;
 
-    /**
-     * @param \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface $tokenStorage
-     * @param \Spryker\Zed\User\Business\UserFacadeInterface $userFacade
-     */
     public function __construct(
         TokenStorageInterface $tokenStorage,
         UserFacadeInterface $userFacade
@@ -43,21 +39,11 @@ class CurrentUserSessionHandlerListener extends AbstractListener
         $this->userFacade = $userFacade;
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return bool|null
-     */
     public function supports(Request $request): ?bool
     {
         return null;
     }
 
-    /**
-     * @param \Symfony\Component\HttpKernel\Event\RequestEvent $event
-     *
-     * @return void
-     */
     public function authenticate(RequestEvent $event): void
     {
         $token = $this->tokenStorage->getToken();
@@ -85,11 +71,6 @@ class CurrentUserSessionHandlerListener extends AbstractListener
         );
     }
 
-    /**
-     * @param string $username
-     *
-     * @return \Generated\Shared\Transfer\UserTransfer
-     */
     protected function getUserTransfer(string $username): UserTransfer
     {
         $userCriteriaTransfer = $this->createUserCriteriaTransfer($username);
@@ -98,11 +79,6 @@ class CurrentUserSessionHandlerListener extends AbstractListener
         return $userCollectionTransfer->getUsers()->getIterator()->current();
     }
 
-    /**
-     * @param string $username
-     *
-     * @return \Generated\Shared\Transfer\UserCriteriaTransfer
-     */
     protected function createUserCriteriaTransfer(string $username): UserCriteriaTransfer
     {
         $userConditionsTransfer = (new UserConditionsTransfer())
@@ -112,11 +88,6 @@ class CurrentUserSessionHandlerListener extends AbstractListener
         return (new UserCriteriaTransfer())->setUserConditions($userConditionsTransfer);
     }
 
-    /**
-     * @param \Symfony\Component\Security\Core\User\UserInterface $user
-     *
-     * @return string
-     */
     protected function getUserIdentifier(UserInterface $user): string
     {
         if ($this->isSymfonyVersion5() === true) {

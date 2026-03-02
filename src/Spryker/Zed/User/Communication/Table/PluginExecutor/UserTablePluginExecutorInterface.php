@@ -18,17 +18,7 @@ interface UserTablePluginExecutorInterface
      */
     public function executeActionButtonExpanderPlugins(array $user): array;
 
-    /**
-     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $tableConfiguration
-     *
-     * @return \Spryker\Zed\Gui\Communication\Table\TableConfiguration
-     */
     public function executeConfigExpanderPlugins(TableConfiguration $tableConfiguration): TableConfiguration;
 
-    /**
-     * @param array $item
-     *
-     * @return array
-     */
     public function executeDataExpanderPlugins(array $item): array;
 }

@@ -71,11 +71,6 @@ class UsersTable extends AbstractTable
      */
     protected $userTablePluginExecutor;
 
-    /**
-     * @param \Spryker\Zed\User\Persistence\UserQueryContainerInterface $userQueryContainer
-     * @param \Spryker\Service\UtilDateTime\UtilDateTimeServiceInterface $utilDateTimeService
-     * @param \Spryker\Zed\User\Communication\Table\PluginExecutor\UserTablePluginExecutorInterface $userTablePluginExecutor
-     */
     public function __construct(
         UserQueryContainerInterface $userQueryContainer,
         UtilDateTimeServiceInterface $utilDateTimeService,
@@ -123,11 +118,6 @@ class UsersTable extends AbstractTable
         return $config;
     }
 
-    /**
-     * @param \Spryker\Zed\Gui\Communication\Table\TableConfiguration $tableConfiguration
-     *
-     * @return \Spryker\Zed\Gui\Communication\Table\TableConfiguration
-     */
     protected function executeConfigExpanderPlugins(TableConfiguration $tableConfiguration): TableConfiguration
     {
         return $this->userTablePluginExecutor->executeConfigExpanderPlugins($tableConfiguration);
@@ -158,11 +148,6 @@ class UsersTable extends AbstractTable
         return $results;
     }
 
-    /**
-     * @param array $item
-     *
-     * @return array
-     */
     protected function executeDataExpanderPlugins(array $item): array
     {
         return $this->userTablePluginExecutor->executeDataExpanderPlugins($item);

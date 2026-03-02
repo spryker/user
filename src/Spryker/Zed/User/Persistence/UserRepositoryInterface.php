@@ -12,10 +12,5 @@ use Generated\Shared\Transfer\UserCriteriaTransfer;
 
 interface UserRepositoryInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\UserCriteriaTransfer $userCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\UserCollectionTransfer
-     */
     public function getUserCollection(UserCriteriaTransfer $userCriteriaTransfer): UserCollectionTransfer;
 }

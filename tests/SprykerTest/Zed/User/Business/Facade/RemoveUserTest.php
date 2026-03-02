@@ -29,9 +29,6 @@ class RemoveUserTest extends Unit
      */
     public UserBusinessTester $tester;
 
-    /**
-     * @return void
-     */
     public function testShouldExecuteStackOfUserPostUpdatePlugins(): void
     {
         // Arrange

@@ -57,9 +57,6 @@ class UserCommunicationFactory extends AbstractCommunicationFactory
         );
     }
 
-    /**
-     * @return \Spryker\Zed\User\Communication\Table\PluginExecutor\UserTablePluginExecutorInterface
-     */
     public function createUserTablePluginExecutor(): UserTablePluginExecutorInterface
     {
         return new UserTablePluginExecutor(
@@ -99,25 +96,16 @@ class UserCommunicationFactory extends AbstractCommunicationFactory
         return $this->getFormFactory()->create(UserUpdateForm::class, $data, $options);
     }
 
-    /**
-     * @return \Symfony\Component\Form\FormInterface
-     */
     public function getUserDeleteConfirmForm(): FormInterface
     {
         return $this->getFormFactory()->create(UserDeleteConfirmForm::class);
     }
 
-    /**
-     * @return \Symfony\Component\Form\FormInterface
-     */
     public function createActivateUserForm(): FormInterface
     {
         return $this->getFormFactory()->create(ActivateUserForm::class);
     }
 
-    /**
-     * @return \Symfony\Component\Form\FormInterface
-     */
     public function createDeactivateUserForm(): FormInterface
     {
         return $this->getFormFactory()->create(DeactivateUserForm::class);
@@ -145,9 +133,6 @@ class UserCommunicationFactory extends AbstractCommunicationFactory
         return new UserUpdateFormDataProvider($this->getGroupPlugin(), $userFacade);
     }
 
-    /**
-     * @return \Spryker\Zed\User\Communication\Processor\CurrentUserDataRequestLogProcessorInterface
-     */
     public function createCurrentUserDataRequestLogProcessor(): CurrentUserDataRequestLogProcessorInterface
     {
         return new CurrentUserDataRequestLogProcessor($this->getRequestStackService());
@@ -161,9 +146,6 @@ class UserCommunicationFactory extends AbstractCommunicationFactory
         return $this->getProvidedDependency(UserDependencyProvider::PLUGIN_GROUP);
     }
 
-    /**
-     * @return \Spryker\Zed\User\Communication\Extender\SecurityServiceExtenderInterface
-     */
     public function createSecurityServiceExtender(): SecurityServiceExtenderInterface
     {
         if (class_exists(AuthenticationProviderManager::class) === true) {
@@ -199,9 +181,6 @@ class UserCommunicationFactory extends AbstractCommunicationFactory
         return $this->getProvidedDependency(UserDependencyProvider::PLUGINS_USER_TABLE_DATA_EXPANDER);
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\RequestStack|null
-     */
     public function getRequestStackService(): ?RequestStack
     {
         return $this->getProvidedDependency(UserDependencyProvider::SERVICE_REQUEST_STACK);

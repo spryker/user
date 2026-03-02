@@ -43,9 +43,6 @@ class CurrentRequestProcessorPluginTest extends Unit
      */
     protected UserCommunicationTester $tester;
 
-    /**
-     * @return void
-     */
     public function testInvokeDoesNotModifyDataIfSessionIsNotSet(): void
     {
         // Arrange
@@ -60,9 +57,6 @@ class CurrentRequestProcessorPluginTest extends Unit
         $this->assertSame($data, $processedData);
     }
 
-    /**
-     * @return void
-     */
     public function testInvokeDoesNotModifyDataIfUserIsNotSetInSession(): void
     {
         // Arrange
@@ -79,9 +73,6 @@ class CurrentRequestProcessorPluginTest extends Unit
         $this->assertSame($data, $processedData);
     }
 
-    /**
-     * @return void
-     */
     public function testInvokeSetsUserData(): void
     {
         // Arrange
@@ -104,9 +95,6 @@ class CurrentRequestProcessorPluginTest extends Unit
         $this->assertSame('test_uuid', $processedData['extra']['request']['user_uuid']);
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\RequestStack
-     */
     protected function createRequestStack(): RequestStack
     {
         $requestStack = new RequestStack();
@@ -115,11 +103,6 @@ class CurrentRequestProcessorPluginTest extends Unit
         return $requestStack;
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\RequestStack $requestStack
-     *
-     * @return void
-     */
     protected function setRequestStackService(RequestStack $requestStack): void
     {
         $this->tester->setDependency(UserDependencyProvider::SERVICE_REQUEST_STACK, $requestStack);

@@ -44,17 +44,11 @@ class UserTest extends Unit
      */
     public $tester;
 
-    /**
-     * @return \Spryker\Zed\User\Business\UserFacadeInterface
-     */
     protected function getUserFacade(): UserFacadeInterface
     {
         return $this->tester->getLocator()->user()->facade();
     }
 
-    /**
-     * @return array
-     */
     private function mockUserData(): array
     {
         $data = [];
@@ -77,9 +71,6 @@ class UserTest extends Unit
         return $this->getUserFacade()->addUser($data['firstName'], $data['lastName'], $data['username'], $data['password']);
     }
 
-    /**
-     * @return void
-     */
     public function testAddUser(): void
     {
         $data = $this->mockUserData();
@@ -94,9 +85,6 @@ class UserTest extends Unit
         $this->assertNotEquals($data['password'], $user->getPassword());
     }
 
-    /**
-     * @return void
-     */
     public function testAfterCallToRemoveUserGetUserByIdMustThrowAnException(): void
     {
         $data = $this->mockUserData();
@@ -110,9 +98,6 @@ class UserTest extends Unit
         $this->getUserFacade()->getActiveUserById($user->getIdUser());
     }
 
-    /**
-     * @return void
-     */
     public function testUpdateUserWithSamePassword(): void
     {
         $data = $this->mockUserData();
@@ -158,9 +143,6 @@ class UserTest extends Unit
         $this->assertSame($hashedPassword, $newHashedPassword);
     }
 
-    /**
-     * @return void
-     */
     public function testUpdateUserWithNewPassword(): void
     {
         $data = $this->mockUserData();
@@ -185,9 +167,6 @@ class UserTest extends Unit
         $this->assertTrue($this->getUserFacade()->isValidPassword($data2['password'], $finalUser->getPassword()));
     }
 
-    /**
-     * @return void
-     */
     public function testUpdateWithPasswordHashIgnored(): void
     {
         $data = $this->mockUserData();
@@ -212,9 +191,6 @@ class UserTest extends Unit
         $this->assertNotEquals($user3->getPassword(), $data['password']);
     }
 
-    /**
-     * @return void
-     */
     public function testGetUserByUsername(): void
     {
         $data = $this->mockUserData();
@@ -230,9 +206,6 @@ class UserTest extends Unit
         $this->assertSame($user->getPassword(), $mock->getPassword());
     }
 
-    /**
-     * @return void
-     */
     public function testGetUserById(): void
     {
         $data = $this->mockUserData();
@@ -248,9 +221,6 @@ class UserTest extends Unit
         $this->assertSame($user->getPassword(), $mock->getPassword());
     }
 
-    /**
-     * @return void
-     */
     public function testIsValidPassword(): void
     {
         $data = $this->mockUserData();
@@ -259,9 +229,6 @@ class UserTest extends Unit
         $this->assertTrue($this->getUserFacade()->isValidPassword($data['password'], $user->getPassword()));
     }
 
-    /**
-     * @return void
-     */
     public function testUserTransferClonedBeforeStoringInSession(): void
     {
         $sessionClient = $this->createSessionClient();
@@ -288,9 +255,6 @@ class UserTest extends Unit
         $userModel->setCurrentUser($userTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testUserTransferClonedAfterReadingFromSession(): void
     {
         $sessionClient = $this->createSessionClient();
@@ -317,9 +281,6 @@ class UserTest extends Unit
         $this->assertNotSame($userTransfer, $userFromSession);
     }
 
-    /**
-     * @return void
-     */
     public function testHasCurrentUserReturnsFalseOnNull(): void
     {
         $sessionClient = $this->createSessionClient();
@@ -399,9 +360,6 @@ class UserTest extends Unit
         $this->assertNull($foundUserTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testExpandMailWithUserDataReturnsUpdatedTransfer(): void
     {
         // Arrange
@@ -419,9 +377,6 @@ class UserTest extends Unit
         $this->assertSame($mailTransfer->getUser()->getIdUser(), $userTransfer->getIdUser());
     }
 
-    /**
-     * @return void
-     */
     public function testExpandMailWithUserDataDoesNothingWithIncorrectData(): void
     {
         // Arrange
@@ -470,11 +425,6 @@ class UserTest extends Unit
         $this->tester->getFacade()->deactivateUser($userTransfer->getIdUser());
     }
 
-    /**
-     * @param bool $isPostSavePluginsEnabledAfterUserStatusChange
-     *
-     * @return \Generated\Shared\Transfer\UserTransfer
-     */
     protected function prepareUserStatusChangingDataAndDependencies(
         bool $isPostSavePluginsEnabledAfterUserStatusChange
     ): UserTransfer {
@@ -519,11 +469,6 @@ class UserTest extends Unit
         return $userPostSavePluginMock;
     }
 
-    /**
-     * @param string $recipientEmail
-     *
-     * @return \Generated\Shared\Transfer\MailTransfer
-     */
     protected function getMailTransfer(string $recipientEmail): MailTransfer
     {
         return (new MailBuilder())
@@ -534,11 +479,6 @@ class UserTest extends Unit
             ->build();
     }
 
-    /**
-     * @param string $userName
-     *
-     * @return \Generated\Shared\Transfer\UserTransfer
-     */
     protected function createUserTransfer(string $userName): UserTransfer
     {
         $userTransfer = new UserTransfer();
@@ -573,9 +513,6 @@ class UserTest extends Unit
         return $queryContainer;
     }
 
-    /**
-     * @return array
-     */
     public function getUserPositiveScenarioDataProvider(): array
     {
         return [
@@ -592,9 +529,6 @@ class UserTest extends Unit
         ];
     }
 
-    /**
-     * @return array
-     */
     public function getUserNegativeScenarioDataProvider(): array
     {
         return [

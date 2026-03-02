@@ -45,9 +45,6 @@ class GetUserCollectionTest extends Unit
      */
     public UserBusinessTester $tester;
 
-    /**
-     * @return void
-     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -55,9 +52,6 @@ class GetUserCollectionTest extends Unit
         $this->tester->ensureUserTableIsEmpty();
     }
 
-    /**
-     * @return void
-     */
     public function testReturnsCollectionOfUserTransfersById(): void
     {
         // Arrange
@@ -73,9 +67,6 @@ class GetUserCollectionTest extends Unit
         $this->assertSame($userTransfer->getIdUserOrFail(), $userCollectionTransfer->getUsers()->getIterator()->current()->getIdUser());
     }
 
-    /**
-     * @return void
-     */
     public function testReturnsCollectionOfUserTransfersByUsername(): void
     {
         // Arrange
@@ -91,9 +82,6 @@ class GetUserCollectionTest extends Unit
         $this->assertSame($userTransfer->getIdUserOrFail(), $userCollectionTransfer->getUsers()->getIterator()->current()->getIdUser());
     }
 
-    /**
-     * @return void
-     */
     public function testReturnsCollectionOfUserTransfersByStatus(): void
     {
         // Arrange
@@ -109,9 +97,6 @@ class GetUserCollectionTest extends Unit
         $this->assertSame($userTransfer->getIdUserOrFail(), $userCollectionTransfer->getUsers()->getIterator()->current()->getIdUser());
     }
 
-    /**
-     * @return void
-     */
     public function testThrowsExceptionWhenUsersNotFoundAndThrowExceptionConditionIsSetToTrue(): void
     {
         // Arrange
@@ -128,9 +113,6 @@ class GetUserCollectionTest extends Unit
         $this->tester->getFacade()->getUserCollection($userCriteriaTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testReturnsCollectionOfUserTransfersByUuid(): void
     {
         // Arrange
@@ -151,9 +133,6 @@ class GetUserCollectionTest extends Unit
         $this->assertSame($userTransfer->getUuidOrFail(), $userCollectionTransfer->getUsers()->getIterator()->current()->getUuid());
     }
 
-    /**
-     * @return void
-     */
     public function testReturnsEmptyCollectionOfUserTransfersByInvalidId(): void
     {
         // Arrange
@@ -168,9 +147,6 @@ class GetUserCollectionTest extends Unit
         $this->assertCount(0, $userCollectionTransfer->getUsers());
     }
 
-    /**
-     * @return void
-     */
     public function testExecutesUserExpanderPlugins(): void
     {
         // Arrange
@@ -193,9 +169,6 @@ class GetUserCollectionTest extends Unit
         $this->tester->getFacade()->getUserCollection($userCriteriaTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testExecutesUserTransferExpanderPlugins(): void
     {
         // Arrange
@@ -218,9 +191,6 @@ class GetUserCollectionTest extends Unit
         $this->tester->getFacade()->getUserCollection($userCriteriaTransfer);
     }
 
-    /**
-     * @return void
-     */
     public function testExecutesUserQueryCriteriaExpanderPlugins(): void
     {
         // Arrange
@@ -242,11 +212,6 @@ class GetUserCollectionTest extends Unit
         $this->assertSame($userTransfer->getIdUserOrFail(), $resultUserTransfer->getIdUserOrFail());
     }
 
-    /**
-     * @param int $idUser
-     *
-     * @return \Spryker\Zed\UserExtension\Dependency\Plugin\UserQueryCriteriaExpanderPluginInterface
-     */
     public function createUserQueryCriteriaExpanderPlugin(int $idUser): UserQueryCriteriaExpanderPluginInterface
     {
         return new class ($idUser) implements UserQueryCriteriaExpanderPluginInterface {
@@ -255,20 +220,11 @@ class GetUserCollectionTest extends Unit
              */
             protected int $idUser;
 
-            /**
-             * @param int $idUser
-             */
             public function __construct(int $idUser)
             {
                 $this->idUser = $idUser;
             }
 
-            /**
-             * @param \Generated\Shared\Transfer\QueryCriteriaTransfer $queryCriteriaTransfer
-             * @param \Generated\Shared\Transfer\UserCriteriaTransfer $userCriteriaTransfer
-             *
-             * @return \Generated\Shared\Transfer\QueryCriteriaTransfer
-             */
             public function expand(QueryCriteriaTransfer $queryCriteriaTransfer, UserCriteriaTransfer $userCriteriaTransfer): QueryCriteriaTransfer
             {
                 return $queryCriteriaTransfer->setConditions([

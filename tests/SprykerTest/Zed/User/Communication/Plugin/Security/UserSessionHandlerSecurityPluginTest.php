@@ -36,9 +36,6 @@ class UserSessionHandlerSecurityPluginTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     protected function _before(): void
     {
         parent::_before();
@@ -75,9 +72,6 @@ class UserSessionHandlerSecurityPluginTest extends Unit
         $this->assertTrue($container->has($listenerName));
     }
 
-    /**
-     * @return void
-     */
     protected function addAuthentication(): void
     {
         $securityConfiguration = new SecurityConfiguration();

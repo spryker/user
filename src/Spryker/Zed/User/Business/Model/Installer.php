@@ -28,11 +28,6 @@ class Installer implements InstallerInterface
      */
     protected $settings;
 
-    /**
-     * @param \Spryker\Zed\User\Persistence\UserQueryContainerInterface $queryContainer
-     * @param \Spryker\Zed\User\Business\Model\UserInterface $user
-     * @param \Spryker\Zed\User\UserConfig $settings
-     */
     public function __construct(
         UserQueryContainerInterface $queryContainer,
         UserInterface $user,

@@ -19,11 +19,6 @@ class UserDataHelper extends Module
     use LocatorHelperTrait;
     use DataCleanupHelperTrait;
 
-    /**
-     * @param array $override
-     *
-     * @return \Generated\Shared\Transfer\UserTransfer
-     */
     public function haveUser(array $override = []): UserTransfer
     {
         /** @var \Generated\Shared\Transfer\UserTransfer $userTransfer */
@@ -37,19 +32,11 @@ class UserDataHelper extends Module
         return $userTransfer;
     }
 
-    /**
-     * @return \Spryker\Zed\User\Business\UserFacadeInterface
-     */
     private function getUserFacade(): UserFacadeInterface
     {
         return $this->getLocatorHelper()->getLocator()->user()->facade();
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\UserTransfer $userTransfer
-     *
-     * @return void
-     */
     protected function cleanupUser(UserTransfer $userTransfer): void
     {
         $this->getUserFacade()->removeUser($userTransfer->getIdUser());

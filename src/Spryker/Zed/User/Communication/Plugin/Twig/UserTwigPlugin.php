@@ -47,11 +47,6 @@ class UserTwigPlugin extends AbstractPlugin implements TwigPluginInterface
         return $twig;
     }
 
-    /**
-     * @param \Twig\Environment $twig
-     *
-     * @return \Twig\Environment
-     */
     protected function addTwigGlobalVariables(Environment $twig): Environment
     {
         $twig->addGlobal(static::TWIG_GLOBAL_VARIABLE_USERNAME, $this->getUsername());
@@ -60,9 +55,6 @@ class UserTwigPlugin extends AbstractPlugin implements TwigPluginInterface
         return $twig;
     }
 
-    /**
-     * @return string
-     */
     protected function getUsername(): string
     {
         $username = '';
@@ -75,9 +67,6 @@ class UserTwigPlugin extends AbstractPlugin implements TwigPluginInterface
         return $username;
     }
 
-    /**
-     * @return string
-     */
     protected function getUserEmail(): string
     {
         $userEmail = '';

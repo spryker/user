@@ -45,9 +45,6 @@ class CurrentUserDataRequestLogProcessor implements CurrentUserDataRequestLogPro
      */
     protected ?RequestStack $requestStack;
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\RequestStack|null $requestStack
-     */
     public function __construct(?RequestStack $requestStack)
     {
         $this->requestStack = $requestStack;
@@ -106,11 +103,6 @@ class CurrentUserDataRequestLogProcessor implements CurrentUserDataRequestLogPro
         return $currentRequestData;
     }
 
-    /**
-     * @param \Symfony\Component\HttpFoundation\Request $request
-     *
-     * @return \Generated\Shared\Transfer\UserTransfer|null
-     */
     protected function findUser(Request $request): ?UserTransfer
     {
         return $request->getSession()->get(static::SESSION_KEY_USER);

@@ -45,20 +45,11 @@ class SecurityServiceExtender implements SecurityServiceExtenderInterface
      */
     protected UserFacadeInterface $userFacade;
 
-    /**
-     * @param \Spryker\Zed\User\Business\UserFacadeInterface $userFacade
-     */
     public function __construct(UserFacadeInterface $userFacade)
     {
         $this->userFacade = $userFacade;
     }
 
-    /**
-     * @param \Spryker\Shared\SecurityExtension\Configuration\SecurityBuilderInterface $securityBuilder
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Spryker\Shared\SecurityExtension\Configuration\SecurityBuilderInterface
-     */
     public function extend(SecurityBuilderInterface $securityBuilder, ContainerInterface $container): SecurityBuilderInterface
     {
         $this->addAuthenticationListenerFactory($container);
@@ -67,11 +58,6 @@ class SecurityServiceExtender implements SecurityServiceExtenderInterface
         return $securityBuilder;
     }
 
-    /**
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Spryker\Service\Container\ContainerInterface
-     */
     protected function addAuthenticationListenerFactory(ContainerInterface $container): ContainerInterface
     {
         $container->set(
@@ -99,11 +85,6 @@ class SecurityServiceExtender implements SecurityServiceExtenderInterface
         return $container;
     }
 
-    /**
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Spryker\Service\Container\ContainerInterface
-     */
     protected function addAuthenticationListenerPrototype(ContainerInterface $container): ContainerInterface
     {
         $container->set(static::SECURITY_AUTHENTICATION_LISTENER_USER_SESSION_HANDLER_PROTO, $container->protect(function (string $firewallName) use ($container): callable {

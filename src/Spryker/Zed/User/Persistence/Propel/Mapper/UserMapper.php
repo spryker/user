@@ -31,12 +31,6 @@ class UserMapper
         return $userCollectionTransfer;
     }
 
-    /**
-     * @param \Orm\Zed\User\Persistence\SpyUser $userEntity
-     * @param \Generated\Shared\Transfer\UserTransfer $userTransfer
-     *
-     * @return \Generated\Shared\Transfer\UserTransfer
-     */
     protected function mapUserEntityToUserTransfer(SpyUser $userEntity, UserTransfer $userTransfer): UserTransfer
     {
         return $userTransfer->fromArray($userEntity->toArray(), true);

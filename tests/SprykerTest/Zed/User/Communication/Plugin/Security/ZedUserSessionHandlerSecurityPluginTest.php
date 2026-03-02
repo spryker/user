@@ -36,9 +36,6 @@ class ZedUserSessionHandlerSecurityPluginTest extends Unit
      */
     protected $tester;
 
-    /**
-     * @return void
-     */
     protected function _before(): void
     {
         parent::_before();
@@ -48,9 +45,6 @@ class ZedUserSessionHandlerSecurityPluginTest extends Unit
         }
     }
 
-    /**
-     * @return void
-     */
     public function testUserSessionHandlerAddedToContainer(): void
     {
         // Arrange
@@ -70,9 +64,6 @@ class ZedUserSessionHandlerSecurityPluginTest extends Unit
         $this->assertTrue($container->has($listenerName));
     }
 
-    /**
-     * @return void
-     */
     protected function addAuthentication(): void
     {
         $securityConfiguration = new SecurityConfiguration();

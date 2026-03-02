@@ -50,11 +50,6 @@ class UserSessionHandlerSecurityPlugin extends AbstractPlugin implements Securit
         return $securityBuilder;
     }
 
-    /**
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Spryker\Service\Container\ContainerInterface
-     */
     protected function addAuthenticationListenerFactory(ContainerInterface $container): ContainerInterface
     {
         $container->set(
@@ -82,11 +77,6 @@ class UserSessionHandlerSecurityPlugin extends AbstractPlugin implements Securit
         return $container;
     }
 
-    /**
-     * @param \Spryker\Service\Container\ContainerInterface $container
-     *
-     * @return \Spryker\Service\Container\ContainerInterface
-     */
     protected function addAuthenticationListenerPrototype(ContainerInterface $container): ContainerInterface
     {
         $container->set('security.authentication_listener.user_session_handler._proto', $container->protect(function ($providerKey) use ($container) {

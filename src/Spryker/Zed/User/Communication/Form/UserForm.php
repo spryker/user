@@ -84,9 +84,6 @@ class UserForm extends AbstractType
      */
     protected const PATTERN_LAST_NAME = '/^[^:\/<>]+$/';
 
-    /**
-     * @return string
-     */
     public function getBlockPrefix(): string
     {
         return 'user';
@@ -102,11 +99,6 @@ class UserForm extends AbstractType
         return $this->getBlockPrefix();
     }
 
-    /**
-     * @param \Symfony\Component\OptionsResolver\OptionsResolver $resolver
-     *
-     * @return void
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setRequired(static::OPTION_GROUP_CHOICES);
@@ -162,11 +154,6 @@ class UserForm extends AbstractType
         $this->executeFormExpanderPlugins($builder);
     }
 
-    /**
-     * @param \Symfony\Component\Form\FormBuilderInterface $builder
-     *
-     * @return void
-     */
     protected function executeFormExpanderPlugins(FormBuilderInterface $builder): void
     {
         foreach ($this->getFactory()->getFormExpanderPlugins() as $formExpanderPlugin) {
@@ -302,17 +289,11 @@ class UserForm extends AbstractType
         ]);
     }
 
-    /**
-     * @return \Symfony\Component\Validator\Constraints\NotBlank
-     */
     protected function createNotBlankConstraint(): NotBlank
     {
         return new NotBlank();
     }
 
-    /**
-     * @return \Symfony\Component\Validator\Constraints\Regex
-     */
     protected function createFirstNameRegexConstraint(): Regex
     {
         return new Regex([
@@ -320,9 +301,6 @@ class UserForm extends AbstractType
         ]);
     }
 
-    /**
-     * @return \Symfony\Component\Validator\Constraints\Regex
-     */
     protected function createLastNameRegexConstraint(): Regex
     {
         return new Regex([

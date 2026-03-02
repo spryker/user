@@ -26,11 +26,6 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
      */
     protected const COLUMN_UUID = 'uuid';
 
-    /**
-     * @param \Generated\Shared\Transfer\UserCriteriaTransfer $userCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\UserCollectionTransfer
-     */
     public function getUserCollection(UserCriteriaTransfer $userCriteriaTransfer): UserCollectionTransfer
     {
         $userQuery = $this->getFactory()->createUserQuery();
@@ -55,12 +50,6 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
             );
     }
 
-    /**
-     * @param \Orm\Zed\User\Persistence\SpyUserQuery $userQuery
-     * @param \Generated\Shared\Transfer\UserConditionsTransfer $userConditionsTransfer
-     *
-     * @return \Orm\Zed\User\Persistence\SpyUserQuery
-     */
     protected function applyUserFilters(SpyUserQuery $userQuery, UserConditionsTransfer $userConditionsTransfer): SpyUserQuery
     {
         if ($userConditionsTransfer->getUserIds() !== []) {
@@ -82,12 +71,6 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
         return $userQuery;
     }
 
-    /**
-     * @param \Orm\Zed\User\Persistence\SpyUserQuery $userQuery
-     * @param \Generated\Shared\Transfer\UserCriteriaTransfer $userCriteriaTransfer
-     *
-     * @return \Orm\Zed\User\Persistence\SpyUserQuery
-     */
     protected function expandUserQuery(
         SpyUserQuery $userQuery,
         UserCriteriaTransfer $userCriteriaTransfer
@@ -102,11 +85,6 @@ class UserRepository extends AbstractRepository implements UserRepositoryInterfa
             );
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\UserCriteriaTransfer $userCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\QueryCriteriaTransfer
-     */
     protected function executeUserQueryCriteriaExpanderPlugins(
         UserCriteriaTransfer $userCriteriaTransfer
     ): QueryCriteriaTransfer {

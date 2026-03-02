@@ -11,10 +11,5 @@ use Generated\Shared\Transfer\MailTransfer;
 
 interface MailExpanderInterface
 {
-    /**
-     * @param \Generated\Shared\Transfer\MailTransfer $mailTransfer
-     *
-     * @return \Generated\Shared\Transfer\MailTransfer
-     */
     public function expandMailWithUserData(MailTransfer $mailTransfer): MailTransfer;
 }

@@ -44,11 +44,6 @@ class UserReader implements UserReaderInterface
         $this->userTransferExpanderPlugins = $userTransferExpanderPlugins;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\UserCriteriaTransfer $userCriteriaTransfer
-     *
-     * @return \Generated\Shared\Transfer\UserCollectionTransfer
-     */
     public function getUserCollection(UserCriteriaTransfer $userCriteriaTransfer): UserCollectionTransfer
     {
         $userCollectionTransfer = $this->userRepository->getUserCollection($userCriteriaTransfer);
@@ -64,11 +59,6 @@ class UserReader implements UserReaderInterface
         return $userCollectionTransfer;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\UserCollectionTransfer $userCollectionTransfer
-     *
-     * @return \Generated\Shared\Transfer\UserCollectionTransfer
-     */
     protected function executeUserExpanderPlugins(UserCollectionTransfer $userCollectionTransfer): UserCollectionTransfer
     {
         foreach ($this->userExpanderPlugins as $userExpanderPlugin) {

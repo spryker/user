@@ -28,17 +28,11 @@ class UserPersistenceFactory extends AbstractPersistenceFactory
         return SpyUserQuery::create();
     }
 
-    /**
-     * @return \Spryker\Zed\User\Persistence\Propel\Mapper\UserMapper
-     */
     public function createUserMapper(): UserMapper
     {
         return new UserMapper();
     }
 
-    /**
-     * @return \Spryker\Zed\User\Persistence\Propel\Mapper\UserQueryCriteriaMapper
-     */
     public function createUserQueryCriteriaMapper(): UserQueryCriteriaMapper
     {
         return new UserQueryCriteriaMapper();
