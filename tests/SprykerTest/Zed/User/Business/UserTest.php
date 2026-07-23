@@ -241,13 +241,18 @@ class UserTest extends Unit
 
         $userTransfer = $this->createUserTransfer(static::USERNAME);
 
-        // Checks that User TO is cloned before being saved into session.
+        // The stored transfer must be a copy (different instance) built without the password key,
+        // so the field is not marked as modified and cannot travel into a later user update as null.
+        $expectedData = $userTransfer->modifiedToArray();
+        unset($expectedData[UserTransfer::PASSWORD]);
+        $expectedTransfer = (new UserTransfer())->fromArray($expectedData, true);
+
         $sessionClient->expects($this->once())
             ->method('set')
             ->with(
                 $this->stringContains('user'),
                 $this->logicalAnd(
-                    $this->equalTo($userTransfer),
+                    $this->equalTo($expectedTransfer),
                     $this->logicalNot($this->identicalTo($userTransfer)),
                 ),
             );

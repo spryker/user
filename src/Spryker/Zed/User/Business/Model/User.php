@@ -473,7 +473,11 @@ class User implements UserInterface
     {
         $key = $this->createUserKey();
 
-        return $this->session->set($key, clone $user);
+        $userData = $user->modifiedToArray();
+        unset($userData[UserTransfer::PASSWORD]);
+        $userForSession = (new UserTransfer())->fromArray($userData, true);
+
+        return $this->session->set($key, $userForSession);
     }
 
     /**

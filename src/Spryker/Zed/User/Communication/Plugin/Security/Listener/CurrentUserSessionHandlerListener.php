@@ -55,6 +55,10 @@ class CurrentUserSessionHandlerListener extends AbstractListener
             return;
         }
 
+        if (!$this->userFacade->hasCurrentUser()) {
+            return;
+        }
+
         $currentUser = $this->userFacade->getCurrentUser();
         if ($currentUser->getUsername() === $this->getUserIdentifier($token->getUser())) {
             return;

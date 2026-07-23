@@ -7,6 +7,8 @@
 
 namespace Spryker\Zed\User\Communication\Form\Constraints;
 
+use Generated\Shared\Transfer\UserConditionsTransfer;
+use Generated\Shared\Transfer\UserCriteriaTransfer;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -40,11 +42,17 @@ class CurrentPasswordValidator extends ConstraintValidator
      *
      * @return bool
      */
-    protected function isProvidedPasswordEqualsToPersisted($password, CurrentPassword $constraint)
+    protected function isProvidedPasswordEqualsToPersisted($password, CurrentPassword $constraint): bool
     {
-        $userTransfer = $constraint->getFacadeUser()->getCurrentUser();
+        $currentUserTransfer = $constraint->getFacadeUser()->getCurrentUser();
+
+        $userCriteriaTransfer = (new UserCriteriaTransfer())->setUserConditions(
+            (new UserConditionsTransfer())->addUsername($currentUserTransfer->getUsernameOrFail()),
+        );
+        $userCollectionTransfer = $constraint->getFacadeUser()->getUserCollection($userCriteriaTransfer);
+        $freshUserTransfer = $userCollectionTransfer->getUsers()->getIterator()->current();
 
         return $constraint->getFacadeUser()
-            ->isValidPassword($password, $userTransfer->getPasswordOrFail());
+            ->isValidPassword($password, $freshUserTransfer->getPasswordOrFail());
     }
 }
