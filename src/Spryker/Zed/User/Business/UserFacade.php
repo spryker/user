@@ -227,6 +227,18 @@ class UserFacade extends AbstractFacade implements UserFacadeInterface
      *
      * @api
      *
+     * @return void
+     */
+    public function resetCurrentUser()
+    {
+        $this->getFactory()->createUserModel()->resetCurrentUser();
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @api
+     *
      * @return \Generated\Shared\Transfer\UserTransfer
      */
     public function getCurrentUser()

@@ -41,6 +41,8 @@ class User implements UserInterface
      */
     protected $session;
 
+    protected static ?UserTransfer $currentUserTransfer = null;
+
     /**
      * @var \Spryker\Zed\User\UserConfig
      */
@@ -471,13 +473,27 @@ class User implements UserInterface
      */
     public function setCurrentUser(UserTransfer $user)
     {
-        $key = $this->createUserKey();
-
         $userData = $user->modifiedToArray();
         unset($userData[UserTransfer::PASSWORD]);
         $userForSession = (new UserTransfer())->fromArray($userData, true);
 
-        return $this->session->set($key, $userForSession);
+        $key = $this->createUserKey();
+        $this->session->set($key, $userForSession);
+
+        if (!$this->session->has($key)) {
+            static::$currentUserTransfer = $userForSession;
+        }
+
+        return null;
+    }
+
+    /**
+     * @return void
+     */
+    public function resetCurrentUser()
+    {
+        static::$currentUserTransfer = null;
+        $this->session->remove($this->createUserKey());
     }
 
     /**
@@ -497,11 +513,11 @@ class User implements UserInterface
     {
         $key = $this->createUserKey();
 
-        if (!$this->session->has($key)) {
-            return null;
+        if ($this->session->has($key)) {
+            return $this->session->get($key);
         }
 
-        return $this->session->get($key);
+        return static::$currentUserTransfer;
     }
 
     /**

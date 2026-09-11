@@ -137,6 +137,14 @@ interface UserInterface
     public function setCurrentUser(UserTransfer $user);
 
     /**
+     * Specification:
+     * - Discards the current user, both from the session and from the process-local fallback.
+     *
+     * @return void
+     */
+    public function resetCurrentUser();
+
+    /**
      * @return bool
      */
     public function hasCurrentUser();

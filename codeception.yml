@@ -2,6 +2,7 @@ namespace: User
 include:
     - tests/SprykerTest/Zed/User
     - tests/SprykerTest/Shared/User
+    - tests/SprykerTest/Glue/User
 paths:
     tests: tests
     output: tests/_output

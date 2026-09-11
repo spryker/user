@@ -13,6 +13,7 @@ use Generated\Shared\Transfer\MailRecipientTransfer;
 use Generated\Shared\Transfer\MailTransfer;
 use Generated\Shared\Transfer\UserCriteriaTransfer;
 use Generated\Shared\Transfer\UserTransfer;
+use ReflectionProperty;
 use Spryker\Client\Session\SessionClient;
 use Spryker\Zed\User\Business\Exception\UserNotFoundException;
 use Spryker\Zed\User\Business\Model\User;
@@ -34,6 +35,18 @@ use Spryker\Zed\UserExtension\Dependency\Plugin\UserPostSavePluginInterface;
  */
 class UserTest extends Unit
 {
+    /**
+     * `User` keeps the current user in a process-local property wherever the session does not
+     * accept it - which is every test here, because the session client is a mock that reports
+     * `has()` as false. Without this reset the user set by one test is still acting in the next.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        (new ReflectionProperty(User::class, 'currentUserTransfer'))->setValue(null, null);
+    }
+
     /**
      * @var string
      */

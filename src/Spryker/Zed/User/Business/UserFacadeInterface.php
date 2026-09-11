@@ -185,6 +185,16 @@ interface UserFacadeInterface
 
     /**
      * Specification:
+     * - Discards the current user from the session and from the process-local fallback.
+     *
+     * @api
+     *
+     * @return void
+     */
+    public function resetCurrentUser();
+
+    /**
+     * Specification:
      * - TODO: Add method specification.
      *
      * @api
