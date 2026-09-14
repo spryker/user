@@ -277,16 +277,16 @@ class UserForm extends AbstractType
      */
     protected function createUniqueEmailConstraint()
     {
-        return new Callback([
-            'callback' => function ($email, ExecutionContextInterface $contextInterface) {
+        return new Callback(
+            callback: function ($email, ExecutionContextInterface $contextInterface) {
                 if ($this->getFacade()->hasUserByUsername($email)) {
                     $contextInterface->addViolation('User with email "{{ username }}" already exists.', [
                         '{{ username }}' => $email,
                     ]);
                 }
             },
-            'groups' => [static::GROUP_UNIQUE_USERNAME_CHECK],
-        ]);
+            groups: [static::GROUP_UNIQUE_USERNAME_CHECK],
+        );
     }
 
     protected function createNotBlankConstraint(): NotBlank
