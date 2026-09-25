@@ -140,10 +140,23 @@ class UserConfig extends AbstractBundleConfig
     /**
      * @return array<string>
      */
-    private function getUserFromGlobalConfig()
+    protected function getUserFromGlobalConfig()
     {
         $users = $this->get(UserConstants::USER_SYSTEM_USERS);
 
         return $users;
+    }
+
+    /**
+     * Specification:
+     * - Returns the bcrypt cost factor used to hash Zed user passwords.
+     *
+     * @api
+     *
+     * @return int
+     */
+    public function getPasswordHashCost(): int
+    {
+        return $this->get(UserConstants::PASSWORD_HASH_COST, PASSWORD_BCRYPT_DEFAULT_COST);
     }
 }

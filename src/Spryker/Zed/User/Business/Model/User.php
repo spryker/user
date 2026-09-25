@@ -174,7 +174,7 @@ class User implements UserInterface
      */
     public function encryptPassword($password)
     {
-        return password_hash($password, PASSWORD_BCRYPT);
+        return password_hash($password, PASSWORD_BCRYPT, ['cost' => $this->userConfig->getPasswordHashCost()]);
     }
 
     /**
@@ -281,7 +281,7 @@ class User implements UserInterface
      *
      * @return bool
      */
-    private function isRawPassword($password)
+    protected function isRawPassword($password)
     {
         $passwordInfo = password_get_info($password);
 
