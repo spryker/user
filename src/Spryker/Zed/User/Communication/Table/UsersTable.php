@@ -191,7 +191,7 @@ class UsersTable extends AbstractTable
             case SpyUserTableMap::COL_STATUS_ACTIVE:
                 return $this->generateLabel('Active', 'label-primary');
             case SpyUserTableMap::COL_STATUS_BLOCKED:
-                return $this->generateLabel('Deactivated', 'label-danger');
+                return $this->generateLabel('Inactive', 'badge-outline-dark');
             case SpyUserTableMap::COL_STATUS_DELETED:
                 return $this->generateLabel('Deleted', 'label-default');
         }
