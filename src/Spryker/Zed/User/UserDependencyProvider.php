@@ -100,6 +100,8 @@ class UserDependencyProvider extends AbstractBundleDependencyProvider
      */
     public const SERVICE_REQUEST_STACK = 'request_stack';
 
+    public const string CLIENT_SECURITY_BLOCKER = 'CLIENT_SECURITY_BLOCKER';
+
     /**
      * @param \Spryker\Zed\Kernel\Container $container
      *
@@ -133,6 +135,7 @@ class UserDependencyProvider extends AbstractBundleDependencyProvider
         $container = $this->addUserFormExpanderPlugins($container);
         $container = $this->addUsersTableExtenderPlugins($container);
         $container = $this->addRequestStackService($container);
+        $container = $this->addSecurityBlockerClient($container);
 
         return $container;
     }
@@ -155,6 +158,15 @@ class UserDependencyProvider extends AbstractBundleDependencyProvider
     {
         $container->set(static::CLIENT_SESSION, function (Container $container) {
             return $container->getLocator()->session()->client();
+        });
+
+        return $container;
+    }
+
+    protected function addSecurityBlockerClient(Container $container): Container
+    {
+        $container->set(static::CLIENT_SECURITY_BLOCKER, function (Container $container) {
+            return $container->getLocator()->securityBlocker()->client();
         });
 
         return $container;

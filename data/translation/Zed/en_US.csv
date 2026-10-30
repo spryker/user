@@ -23,3 +23,4 @@ Warning,Warning
 "Root group","Root group"
 E-mail,E-Mail
 "Your password must include at least one uppercase letter, one lowercase letter, one number, and one special character from the following list: !@#$%^&*()_-+=[]{}|;:<>.,/?\~. Non-Latin and other special characters are not allowed.","Your password must include at least one uppercase letter, one lowercase letter, one number, and one special character from the following list: !@#$%^&*()_-+=[]{}|;:<>.,/?\~. Non-Latin and other special characters are not allowed."
+"You reached the limit of password change attempts. Please try again later.","You reached the limit of password change attempts. Please try again later."

@@ -7,6 +7,7 @@
 
 namespace Spryker\Zed\User\Communication;
 
+use Spryker\Client\SecurityBlocker\SecurityBlockerClientInterface;
 use Spryker\Zed\Kernel\Communication\AbstractCommunicationFactory;
 use Spryker\Zed\User\Communication\Extender\SecurityServiceExtender;
 use Spryker\Zed\User\Communication\Extender\SecurityServiceExtenderInterface;
@@ -18,6 +19,8 @@ use Spryker\Zed\User\Communication\Form\ResetPasswordForm;
 use Spryker\Zed\User\Communication\Form\UserDeleteConfirmForm;
 use Spryker\Zed\User\Communication\Form\UserForm;
 use Spryker\Zed\User\Communication\Form\UserUpdateForm;
+use Spryker\Zed\User\Communication\Limiter\PasswordChangeLimiter;
+use Spryker\Zed\User\Communication\Limiter\PasswordChangeLimiterInterface;
 use Spryker\Zed\User\Communication\Plugin\Security\UserSessionHandlerSecurityPlugin;
 use Spryker\Zed\User\Communication\Processor\CurrentUserDataRequestLogProcessor;
 use Spryker\Zed\User\Communication\Processor\CurrentUserDataRequestLogProcessorInterface;
@@ -184,5 +187,18 @@ class UserCommunicationFactory extends AbstractCommunicationFactory
     public function getRequestStackService(): ?RequestStack
     {
         return $this->getProvidedDependency(UserDependencyProvider::SERVICE_REQUEST_STACK);
+    }
+
+    public function createPasswordChangeLimiter(): PasswordChangeLimiterInterface
+    {
+        return new PasswordChangeLimiter(
+            $this->getSecurityBlockerClient(),
+            $this->getConfig(),
+        );
+    }
+
+    public function getSecurityBlockerClient(): SecurityBlockerClientInterface
+    {
+        return $this->getProvidedDependency(UserDependencyProvider::CLIENT_SECURITY_BLOCKER);
     }
 }

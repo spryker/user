@@ -17,6 +17,10 @@ class UserConfig extends AbstractBundleConfig
      */
     public const KEY_INSTALLER_DATA = 'installer_data';
 
+    protected const int PASSWORD_CHANGE_ATTEMPT_LIMIT = 5;
+
+    protected const int PASSWORD_CHANGE_ATTEMPT_LIMIT_TTL_SECONDS = 900;
+
     /**
      * @var int
      */
@@ -158,5 +162,31 @@ class UserConfig extends AbstractBundleConfig
     public function getPasswordHashCost(): int
     {
         return $this->get(UserConstants::PASSWORD_HASH_COST, PASSWORD_BCRYPT_DEFAULT_COST);
+    }
+
+    /**
+     * Specification:
+     * - Returns the maximum number of password change attempts per user in one fixed window.
+     * - Counts every attempt, also an attempt with the correct current password.
+     * - The window starts at the first attempt and ends after `getPasswordChangeAttemptLimitTtl()` seconds.
+     * - Returns `0` when no limit is applied. A negative value also disables the limit.
+     *
+     * @api
+     */
+    public function getPasswordChangeAttemptLimit(): int
+    {
+        return static::PASSWORD_CHANGE_ATTEMPT_LIMIT;
+    }
+
+    /**
+     * Specification:
+     * - Returns the length of the password change attempt limit window in seconds, counted from the first attempt in the window.
+     * - A value below `60` is raised to `60` seconds by `SecurityBlockerClient::incrementAttemptCount()`.
+     *
+     * @api
+     */
+    public function getPasswordChangeAttemptLimitTtl(): int
+    {
+        return static::PASSWORD_CHANGE_ATTEMPT_LIMIT_TTL_SECONDS;
     }
 }

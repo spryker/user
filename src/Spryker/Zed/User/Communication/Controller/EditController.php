@@ -15,6 +15,7 @@ use Spryker\Zed\Kernel\Communication\Controller\AbstractController;
 use Spryker\Zed\User\Business\Exception\UserNotFoundException;
 use Spryker\Zed\User\Communication\Form\ResetPasswordForm;
 use Spryker\Zed\User\Communication\Form\UserForm;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
@@ -110,6 +111,8 @@ class EditController extends AbstractController
      * @var string
      */
     protected const ERROR_ACCESS_DENIED_CAUSE = 'access_denied';
+
+    protected const string MESSAGE_PASSWORD_CHANGE_LIMIT_EXCEEDED = 'You reached the limit of password change attempts. Please try again later.';
 
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
@@ -392,8 +395,18 @@ class EditController extends AbstractController
         $currentUserTransfer = $this->getFacade()->getCurrentUser();
         $resetPasswordForm = $this
             ->getFactory()
-            ->createResetPasswordForm()
-            ->handleRequest($request);
+            ->createResetPasswordForm();
+
+        if ($this->isFormSubmitRequest($resetPasswordForm, $request) && !$this->getFactory()->createPasswordChangeLimiter()->reserveAttempt($currentUserTransfer->getIdUserOrFail())) {
+            $this->addErrorMessage(static::MESSAGE_PASSWORD_CHANGE_LIMIT_EXCEEDED);
+
+            return $this->viewResponse([
+                'username' => $currentUserTransfer->getUsername(),
+                'resetPasswordForm' => $resetPasswordForm->createView(),
+            ]);
+        }
+
+        $resetPasswordForm->handleRequest($request);
 
         if ($resetPasswordForm->isSubmitted() && $resetPasswordForm->isValid()) {
             $formData = $resetPasswordForm->getData();
@@ -413,6 +426,11 @@ class EditController extends AbstractController
             'username' => $currentUserTransfer->getUsername(),
             'resetPasswordForm' => $resetPasswordForm->createView(),
         ]);
+    }
+
+    protected function isFormSubmitRequest(FormInterface $form, Request $request): bool
+    {
+        return $request->isMethod($form->getConfig()->getMethod()) && $request->request->has($form->getName());
     }
 
     /**
