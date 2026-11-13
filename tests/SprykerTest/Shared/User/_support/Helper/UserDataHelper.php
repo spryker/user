@@ -21,6 +21,10 @@ class UserDataHelper extends Module
 
     public function haveUser(array $override = []): UserTransfer
     {
+        $override += [
+            UserTransfer::USERNAME => sprintf('%s@spryker.com', uniqid('user-', true)),
+        ];
+
         /** @var \Generated\Shared\Transfer\UserTransfer $userTransfer */
         $userTransfer = (new UserBuilder($override))->build();
         $userTransfer = $this->getUserFacade()->createUser($userTransfer);
